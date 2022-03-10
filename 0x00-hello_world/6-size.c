@@ -4,7 +4,7 @@
  *  @intType: int operand
  * @floatType: float operand
  * @longintType: long int operand
- * @longlongintType: long long int operand
+ * @longlintType: long long int operand
  * @charType: char operand
  * Return: 0
  */
@@ -16,14 +16,14 @@ int main(void)
 	int intType;
 	float floatType;
 	long int longintType;
-	long long int longlongintType;
+	long long int longlintType;
 	char charType;
 
-	printf("Size of a char: %zu byte(s\)\n", sizeof(charType));
-	printf("Size of an int: %zu byte(s\)\n", sizeof(intType));
-	printf("Size of a long int: %zu byte(s\)\n", sizeof(longintType));
-	puts("Size of a long long int: %zu byte(s\)", sizeof(longlongintType));
-	printf("Size of float: %zu byte(s\)\n", sizeof(floatType));
+	printf("Size of a char: %zu byte(s)\n", sizeof(charType));
+	printf("Size of an int: %zu byte(s)\n", sizeof(intType));
+	printf("Size of a long int: %zu byte(s)\n", sizeof(longintType));
+	printf("Size of a long long int: %zu byte(s)\n", sizeof(longlintType));
+	printf("Size of float: %zu byte(s)\n", sizeof(floatType));
 
 	return (0);
 }
