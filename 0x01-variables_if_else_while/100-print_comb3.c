@@ -8,18 +8,24 @@
 
 int main(void)
 {
-	int i = 00;
+	int ones;
+	int tens;
 
-	while (i <= 99)
+	for (tens = '0'; tens <= '9'; tens++)
 	{
-		putchar(i + '0');
-		if (i < 99)
+		for (ones = (tens + 1); ones <= '9'; ones++)
 		{
-			putchar(',');
-			putchar(' ');
+			putchar(tens);
+			putchar(ones);
+
+			if (tens != '8' || ones != '9')
+			{
+				putchar(',');
+				putchar(' ');
+			}
 		}
-		i++;
 	}
 	putchar('\n');
+
 	return (0);
 }
