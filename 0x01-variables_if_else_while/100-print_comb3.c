@@ -10,7 +10,7 @@ int main(void)
 {
 	int i = 00;
 
-	while (i < 100)
+	while (i <= 99)
 	{
 		putchar(i + '0');
 		if (i < 99)
