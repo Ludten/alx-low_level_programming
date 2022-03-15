@@ -20,8 +20,11 @@ int print_last_digit(int c)
 	else
 	{
 		unsigned int n;
+
 		n = c < 0 ? -((unsigned int)(c)) : +((unsigned int)(c));
+
 		p = (n % 10);
+
 		_putchar(p + '0');
 	}
 
