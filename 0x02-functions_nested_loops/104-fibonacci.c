@@ -16,7 +16,7 @@ int main(void)
 
 	printf("%ld, %ld, ", x, y);
 
-	for (i = 3; i <= 50; ++i)
+	for (i = 3; i <= 98; ++i)
 	{
 		if (i != 50)
 		{
