@@ -10,17 +10,18 @@
 
 int print_last_digit(int c)
 {
-	int p, n;
+	unsigned int p;
 
 	if (c >= 0)
 	{
-		p = c % 10;
+		p = (c % 10);
 		_putchar(p + '0');
 	}
 	else
 	{
-		n = c * -1;
-		p = n % 10;
+		unsigned int n;
+		n = c < 0 ? -((unsigned int)(c)) : +((unsigned int)(c));
+		p = (n % 10);
 		_putchar(p + '0');
 	}
 
