@@ -18,7 +18,14 @@ int main(void)
 
 	for (i = 3; i <= 50; ++i)
 	{
-		printf("%ld, ", nextTerm);
+		if (i != 50)
+		{
+			printf("%ld, ", nextTerm);
+		}
+		else
+		{
+			printf("%ld\n ", nextTerm);
+		}
 		x = y;
 		y = nextTerm;
 		nextTerm = x + y;
