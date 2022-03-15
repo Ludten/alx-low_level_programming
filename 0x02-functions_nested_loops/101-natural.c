@@ -1,13 +1,12 @@
-#include "main.h"
 #include <stdio.h>
 
 /**
- * mul_35 - multiples of 3 or 5
+ * main - entry point
  *
- * Return: sum
+ * Return: 0 Success.
  */
 
-int mul_35(void)
+int main(void)
 {
 	int i, sum;
 
@@ -18,17 +17,6 @@ int mul_35(void)
 			sum += i;
 		}
 	}
-	return (sum);
-}
-
-/**
- * main - entry point
- *
- * Return: 0 Success.
- */
-
-int main(void)
-{
-	printf("%d\n", mul_35());
-	return (0); /* return: 0 Success. */
+	printf("%d\n", sum);
+	return (0);
 }
