@@ -10,15 +10,15 @@ int main(void)
 {
 	int i;
 
-	int x = 1, y = 2;
+	unsigned long x = 1, y = 2;
 
-	int nextTerm = x + y;
+	unsigned long nextTerm = x + y;
 
-	printf("%d, %d, ", x, y);
+	printf("%ld, %ld, ", x, y);
 
 	for (i = 3; i <= 50; ++i)
 	{
-		printf("%d, ", nextTerm);
+		printf("%ld, ", nextTerm);
 		x = y;
 		y = nextTerm;
 		nextTerm = x + y;
