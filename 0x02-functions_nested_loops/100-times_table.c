@@ -18,26 +18,29 @@ void print_times_table(int n)
 				{
 				_putchar('0' + s);
 				}
-				else if (s <= 9)
+				else
 				{
 					_putchar(',');
 					_putchar(' ');
-					_putchar(' ');
-					_putchar(' ');
-					_putchar('0' + s);
-				}
-				else if (s > 9 && s < 100)
-				{
-					_putchar(','); _putchar(' ');
-					_putchar(' '); _putchar('0' + (s / 10));
-					_putchar('0' + (s % 10));
-				}
-				else if (s > 99)
-				{
-					_putchar(','); _putchar(' ');
-					_putchar('0' + (s / 100));
-					_putchar('0' + ((s / 10) % 10));
-					_putchar('0' + (s % 10));
+					if (s <= 9)
+					{
+						_putchar(' ');
+						_putchar(' ');
+						_putchar('0' + s);
+					}
+					else if (s > 9 && s < 100)
+					{
+						_putchar(' ');
+						_putchar('0' + (s / 10));
+						_putchar('0' + (s % 10));
+					}
+					else if (s > 99)
+					{
+						_putchar(','); _putchar(' ');
+						_putchar('0' + (s / 100));
+						_putchar('0' + ((s / 10) % 10));
+						_putchar('0' + (s % 10));
+					}
 				}
 			}
 			_putchar('\n');
