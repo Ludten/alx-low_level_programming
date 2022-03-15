@@ -8,19 +8,21 @@
 
 int main(void)
 {
-	int x = 1, y = 2;
+	int x = 1;
+	int y = 1;
+	int sum_of_evens = 0;
+	int nextTerm = x + y;
 
-	int nextTerm = x + y, sum;
-
-	while (nextTerm <= 4000000)
+	while (y <= 4000000)
 	{
+		nextTerm = x + y;
 		x = y;
 		y = nextTerm;
-		nextTerm = x + y;
-		sum += nextTerm;
+		if ((nextTerm <= 4000000) && (nextTerm % 2 == 0))
+			sum_of_evens += nextTerm;
 	}
 
-	printf("%d\n", sum + 3);
+	printf("%d\n", sum_of_evens);
 
 	return (0);
 }

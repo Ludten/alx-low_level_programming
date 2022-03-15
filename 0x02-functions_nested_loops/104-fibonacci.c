@@ -8,27 +8,43 @@
 
 int main(void)
 {
-	int i;
+	int ctr, ovrflw;
+	unsigned long a = 1;
+	unsigned long b = 1;
+	unsigned long sum = 0;
+	long a_head, a_tail, b_head, b_tail, sum_head, sum_tail;
 
-	unsigned long x = 1, y = 2;
+	printf("1");
 
-	unsigned long nextTerm = x + y;
-
-	printf("%ld, %ld, ", x, y);
-
-	for (i = 3; i <= 98; ++i)
+	for (ctr = 2; ctr < 93; ctr++)
 	{
-		if (i != 50)
-		{
-			printf("%ld, ", nextTerm);
-		}
-		else
-		{
-			printf("%ld\n", nextTerm);
-		}
-		x = y;
-		y = nextTerm;
-		nextTerm = x + y;
+		sum = a + b;
+		a = b;
+		b = sum;
+		printf(", %lu", sum);
 	}
+
+	a_head = a / 1000000000;
+	a_tail = a % 1000000000;
+	b_head = b / 1000000000;
+	b_tail = b % 1000000000;
+
+	for (; ctr < 99; ctr++)
+	{
+		ovrflw = (a_tail + b_tail) / 1000000000;
+		sum_tail = (a_tail + b_tail) - (1000000000 * ovrflw);
+		sum_head = (a_head + b_head) + ovrflw;
+
+		printf(", %lu%lu", sum_head, sum_tail);
+
+		a_head = b_head;
+		a_tail = b_tail;
+		b_head = sum_head;
+		b_tail = sum_tail;
+	}
+
+
+	printf("\n");
+
 	return (0);
 }
