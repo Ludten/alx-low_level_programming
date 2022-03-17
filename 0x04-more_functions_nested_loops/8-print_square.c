@@ -2,7 +2,7 @@
 /**
  * print_square - print squares
  *
- * @n: argument operand
+ * @size: argument operand
  * Return: Always 0.
  */
 
