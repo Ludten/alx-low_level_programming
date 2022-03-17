@@ -12,7 +12,7 @@ int main(void)
 	long int div = 2;
 	long int HFact;
 
-	while(n != 0)
+	while (n != 0)
 	{
 		if (n % div != 0)
 		{
