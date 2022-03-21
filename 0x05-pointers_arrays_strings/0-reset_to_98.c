@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * main - check the code
+ * reset_to_98 - change to 98
  *
- * @*n: pointer operand
+ * @n: pointer operand
  *
  */
 
