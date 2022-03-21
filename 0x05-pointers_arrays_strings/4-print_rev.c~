@@ -1,0 +1,19 @@
+#include "main.h"
+
+/**
+ * print_rev - print rev string
+ *
+ * @s: string operand
+ *
+ */
+
+void _puts(char *s)
+{
+	int i;
+
+	for (i = (l-1); 1 >= 0; i--)
+	{
+		_putchar(s[i]);
+	}
+	_putchar('\n');
+}
