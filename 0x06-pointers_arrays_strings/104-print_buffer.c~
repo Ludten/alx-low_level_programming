@@ -1,0 +1,15 @@
+#include "main.h"
+
+/**
+ * print_buffer - print buffer
+ *
+ * @b: string operand
+ *
+ * @size: string operand
+ *
+ */
+
+void print_buffer(char *b, int size)
+{
+	printf("sizeof(buffer): %d\n", sizeof(size));
+}
