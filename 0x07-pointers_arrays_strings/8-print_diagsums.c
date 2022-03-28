@@ -16,12 +16,12 @@ void print_diagsums(int *a, int size)
 
 	for(i = 0, j = 0; i < size; i++, j++)
 	{
-		x += a[i][j];
+		x += *((a + i * size) + j);
 	}
 
 	for(i = 0, j = size - 1; i < size; i++, j--)
 	{
-		y += a[i][j];
+		y += *((a + i * size) + j)
 	}
 	printf("%d, %d\n", x, y);
 }
