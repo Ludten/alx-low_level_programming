@@ -12,7 +12,7 @@
 
 void print_diagsums(int *a, int size)
 {
-	long i, j, x, y;
+	unsigned int i, j, x, y;
 
 	for (i = 0, j = 0; i < size; i++, j++)
 	{
