@@ -5,7 +5,7 @@
  *
  * @x: input variable
  *
- * @x: expon variable
+ * @y: expon variable
  *
  * Return: pow Success
  */
