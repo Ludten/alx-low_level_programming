@@ -17,7 +17,6 @@ int main(int argc, __attribute__((unused)) char *argv[])
 		{
 			printf("%s\n", argv[count]);
 		}
-		printf("%d\n", n);
 	}
 	return (0);
 }
