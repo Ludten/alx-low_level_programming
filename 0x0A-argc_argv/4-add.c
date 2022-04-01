@@ -10,6 +10,7 @@
 int isInteger(const char *s)
 {
 	int i = 0;
+
 	while (s[i] != '\0')
 	{
 		if (s[i] < '0' || s[i] > '9')
@@ -29,6 +30,7 @@ int isInteger(const char *s)
 int main(int argc, char const *argv[])
 {
 	int sum = 0;
+
 	while (--argc)
 	{
 		if (isInteger(argv[argc]))
