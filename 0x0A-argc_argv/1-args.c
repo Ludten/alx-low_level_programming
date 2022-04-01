@@ -17,10 +17,10 @@ int main(int argc, __attribute__ ((unused)) char *argv[])
 		{
 			n = count;
 		}
-		printf("%d", n);
+		printf("%d\n", n);
 	}
 	else
-		printf("%d", 0);
+		printf("0\n");
 
 	return (0);
 }
