@@ -16,19 +16,13 @@ char *str_concat(char *s1, char *s2)
 	char *ptr;
 	int i, y, n, m;
 
-	if (s1 == NULL)
-		*s1 = '\0';
-
-	if (s2 == NULL)
-		*s2 = '\0';
-
 	n = 0;
 	m = 0;
 
-	while (s1[n])
+	while (s1 && s1[n])
 		n++;
 
-	while (s2[m])
+	while (s2 && s2[m])
 		m++;
 
 	ptr = malloc(((n + 1) * sizeof(*s1)) + ((m + 1) * sizeof(*s2)));
