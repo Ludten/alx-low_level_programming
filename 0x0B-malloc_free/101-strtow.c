@@ -2,35 +2,30 @@
 #include <stdlib.h>
 
 /**
- * wordctr - count num of words
+ * wordctr - helper function to count the number of w in a string
+ * @s: string to evaluate
  *
- * @str: pointer to char
- *
- * @i: current index
- *
- * Return: number of words
- **/
+ * Return: number of w
+ */
+int wordctr(char *s)
+{
+	int x, c, y;
 
-int wordctr(char *str, int i)
-{
-	if (str[i] == '\0')
-		return (0);
-	if (str[i] == ' ' && str[i + 1] != ' ' && str[i + 1] != '\0')
-		return (1 + wordctr(str, i + 1));
-	return (wordctr(str, i + 1));
-}
-/**
- * _counter - counts number of words
- *
- * @str: pointer to char
- *
- * Return: number of words
- **/
-int _counter(char *str)
-{
-	if (str[0] != ' ')
-		return (1 + wordctr(str, 0));
-	return (wordctr(str, 0));
+	x = 0;
+	y = 0;
+
+	for (c = 0; s[c] != '\0'; c++)
+	{
+		if (s[c] == ' ')
+			x = 0;
+		else if (x == 0)
+		{
+			x = 1;
+			y++;
+		}
+	}
+
+	return (y);
 }
 
 /**
@@ -43,44 +38,42 @@ int _counter(char *str)
 
 char **strtow(char *str)
 {
-	char **ptr;
-	int i, n, m, y;
+	char **ptr, *temp;
+	int i, k = 0, l = 0, w, c = 0, m, n;
 
-	if (str == NULL || str[0] == 0)
+	while (*(str + l))
+		l++;
+	w = wordctr(str);
+	if (w == 0)
 		return (NULL);
-	y = _counter(str);
-	if (y < 1)
-		return (NULL);
-	ptr = malloc(sizeof(char *) * (y + 1));
+
+	ptr = (char **) malloc(sizeof(char *) * (w + 1));
 	if (ptr == NULL)
 		return (NULL);
-	i = 0;
-	while (i < y && *str != '\0')
+
+	for (i = 0; i <= l; i++)
 	{
-		if (*str != ' ')
+		if (str[i] == ' ' || str[i] == '\0')
 		{
-			n = 0;
-			while (str[n] != ' ')
-				n++;
-			ptr[i] = malloc(sizeof(char) * (n + 1));
-			if (ptr[i] == NULL)
+			if (c)
 			{
-				while (--i >= 0)
-					free(ptr[--i]);
-				free(ptr);
-				return (NULL);
+				n = i;
+				temp = (char *) malloc(sizeof(char) * (c + 1));
+				if (temp == NULL)
+					return (NULL);
+				while (m < n)
+					*temp++ = str[m++];
+				*temp = '\0';
+				ptr[k] = temp - c;
+				k++;
+				c = 0;
 			}
-			m = 0;
-			while (m < n)
-			{
-				ptr[i][m] = *str;
-				m++, str++;
-			}
-			ptr[i][m] = '\0';
-			i++;
 		}
-		str++;
+		else if (c++ == 0)
+			m = i;
 	}
-	ptr[i] = '\0';
+
+	ptr[k] = NULL;
+
 	return (ptr);
 }
