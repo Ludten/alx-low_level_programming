@@ -47,7 +47,7 @@ char *argstostr(int ac, char **av)
 
 	if (ptr == NULL)
 	{
-		free(s);
+		free(ptr);
 		return (NULL);
 	}
 
