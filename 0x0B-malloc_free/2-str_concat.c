@@ -32,15 +32,16 @@ char *str_concat(char *s1, char *s2)
 
 	else
 	{
-		for (i = 0; s1[i] != '\0'; i++)
+		for (i = 0; i < n; i++)
 		{
 			ptr[i] = s1[i];
 		}
-		for (y = 0; s2[y] != '\0'; y++)
+		for (y = 0; i < (n + m); y++)
 		{
 			ptr[i] = s2[y];
 			i++;
 		}
+
 		ptr[i] = '\0';
 		return (ptr);
 	}
