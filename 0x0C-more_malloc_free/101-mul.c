@@ -1,107 +1,137 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <ctype.h>
 #include "main.h"
 
 /**
- * is_digit - checks for digit
+ * _iszero - determines if any number is zero
  *
- * @s: string operand
+ * @argv: argument vector.
  *
- * Return: 0 or 1
+ * Return: no return.
  */
 
-int is_digit(char *s)
+void _iszero(char *argv[])
+{
+	int i, n = 1, m = 1;
+
+	for (i = 0; argv[1][i]; i++)
+		if (argv[1][i] != '0')
+		{
+			n = 0;
+			break;
+		}
+
+	for (i = 0; argv[2][i]; i++)
+		if (argv[2][i] != '0')
+		{
+			m = 0;
+			break;
+		}
+
+	if (n == 1 || m == 1)
+	{
+		printf("0\n");
+		exit(0);
+	}
+}
+
+/**
+ * _init_array - set memery to zero in a new array
+ *
+ * @a: char array.
+ *
+ * @len: length of the char array.
+ *
+ * Return: pointer of a char array.
+ */
+char *_init_array(char *a, int len)
 {
 	int i = 0;
 
-	while (s[i])
-	{
-		if (s[i] < '0' || s[i] > '9')
-			return (0);
-		i++;
-	}
-	return (1);
+	for (i = 0; i < len; i++)
+		a[i] = '0';
+	a[len] = '\0';
+	return (a);
 }
 
 /**
- * _strlen - string length
+ * _checknum - length of the number
  *
- * @s: string operand
+ * @argv: arguments vector.
+
+ * @n: row of the array.
  *
- * Return: i
+ * Return: length of the number.
  */
 
-int _strlen(char *s)
+int _checknum(char *argv[], int n)
 {
-	int i = 0;
+	int ln;
 
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
+	for (ln = 0; argv[n][ln]; ln++)
+		if (!isdigit(argv[n][ln]))
+		{
+			printf("Error\n");
+			exit(98);
+		}
+
+	return (ln);
 }
 
 /**
- * errors - handles errors for main
- */
-
-void errors(void)
-{
-	printf("Error\n");
-	exit(98);
-}
-
-/**
- * main - multiplies two positive numbers
+ * main - multiply two numbers
  *
  * @argc: argument counter
  *
  * @argv: argument vector
  *
- * Return: always 0 (Success)
+ * Return: 0 - success.
  */
 
 int main(int argc, char *argv[])
 {
-	char *s1, *s2;
-	int len1, len2, len, i, carry, digit1, digit2, *result, a = 0;
+	int l1, l2, lout, add, addl, i, j, x, y;
+	char *ptr;
 
-	s1 = argv[1], s2 = argv[2];
-	if (argc != 3 || !is_digit(s1) || !is_digit(s2))
-		errors();
-	len1 = _strlen(s1);
-	len2 = _strlen(s2);
-	len = len1 + len2 + 1;
-	result = malloc(sizeof(int) * len);
-	if (!result)
-		return (1);
-	for (i = 0; i <= len1 + len2; i++)
-		result[i] = 0;
-	for (len1 = len1 - 1; len1 >= 0; len1--)
+	if (argc != 3)
+		printf("Error\n"), exit(98);
+	l1 = _checknum(argv, 1), l2 = _checknum(argv, 2);
+	_iszero(argv), lout = l1 + l2, ptr = malloc(lout + 1);
+
+	if (ptr == NULL)
+		printf("Error\n"), exit(98);
+	ptr = _init_array(ptr, lout);
+	x = lout - 1, i = l1 - 1, j = l2 - 1, y = addl = 0;
+	for (; x >= 0; x--, i--)
 	{
-		digit1 = s1[len1] - '0';
-		carry = 0;
-		for (len2 = _strlen(s2) - 1; len2 >= 0; len2--)
+		if (i < 0)
 		{
-			digit2 = s2[len2] - '0';
-			carry += result[len1 + len2 + 1] + (digit1 * digit2);
-			result[len1 + len2 + 1] = carry % 10;
-			carry /= 10;
+			if (addl > 0)
+			{
+				add = (ptr[x] - '0') + addl;
+				if (add > 9)
+					ptr[x - 1] = (add / 10) + '0';
+				ptr[x] = (add % 10) + '0';
+			}
+			i = l1 - 1, j--, addl = 0, y++, x = lout - (1 + y);
 		}
-		if (carry > 0)
-			result[len1 + len2 + 1] += carry;
+		if (j < 0)
+		{
+			if (ptr[0] != '0')
+				break;
+			lout--;
+			free(ptr), ptr = malloc(lout + 1),
+					   ptr = _init_array(ptr, lout);
+			x = lout - 1, i = l1 - 1, j = l2 - 1, y = addl = 0;
+		}
+		if (j >= 0)
+		{
+			add = ((argv[1][i] - '0') * (argv[2][j] - '0')) +
+				  (ptr[x] - '0') + addl;
+			addl = add / 10, ptr[x] = (add % 10) + '0';
+		}
 	}
-	for (i = 0; i < len - 1; i++)
-	{
-		if (result[i])
-			a = 1;
-		if (a)
-			_putchar(result[i] + '0');
-	}
-	if (!a)
-		_putchar('0');
-	_putchar('\n');
-	free(result);
+	printf("%s\n", ptr);
 	return (0);
 }
