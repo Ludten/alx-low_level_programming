@@ -3,132 +3,128 @@
 #include <stdio.h>
 
 /**
- * _memset - fills memory with a constant byte
- *
- * @s: input pointer that represents memory block
- *     to fill
- * @b: characters to fill/set
- * @n: number of bytes to be filled
- *
- * Return: pointer to the filled memory area
-*/
-
-char *_memset(char *s, char b, unsigned int n)
+ * _strlen - returns the length of a string
+ * @s: string s
+ * Return: length of string
+ */
+int _strlen(char *s)
 {
-	unsigned int i = 0;
+	char *p = s;
 
-	while (i < n)
-	{
-		s[i] = b;
-		i++;
-	}
-	return (s);
+	while (*s)
+		s++;
+	return (s - p);
 }
 
 /**
- * _calloc - function that allocates memory
- *           for an array using memset
- *
- * @nmemb: size of array
- * @size: size of each element
- *
- * Return: pointer to new allocated memory
-*/
-
-void *_calloc(unsigned int nmemb, unsigned int size)
+ * multiply - multiplies two numbers and displays it
+ * @f: first "number"
+ * @s: second "number"
+ */
+void multiply(char *f, char *s)
 {
-	char *ptr;
+	int i, len1, len2, total, fdigit, sdigit, res = 0, tmp;
+	int *ptr;
 
-	if (nmemb == 0 || size == 0)
-		return (NULL);
-	ptr = malloc(nmemb * size);
-	if (ptr == NULL)
-		return (NULL);
-	_memset(ptr, 0, nmemb * size);
-
-	return (ptr);
-}
-
-
-/**
- * multiply - initialize array with 0 byte
- *
- * @s1: string 1
- * @s2: string 2
- *
- * Return: nothing
-*/
-
-void multiply(char *s1, char *s2)
-{
-	int i, l1, l2, total_l, f_digit, s_digit, res = 0, tmp;
-	char *ptr;
-	void *temp;
-
-	l1 = _length(s1);
-	l2 = _length(s2);
-	tmp = l2;
-	total_l = l1 + l2;
-	ptr = _calloc(sizeof(int), total_l);
-
-	/* store our pointer address to free later */
-	temp = ptr;
-
-	for (l1--; l1 >= 0; l1--)
+	len1 = _strlen(f);
+	len2 = _strlen(s);
+	tmp = len2;
+	total = len1 + len2;
+	ptr = _calloc(sizeof(int), (len1 + len2));
+	for (len1--; len1 >= 0; len1--)
 	{
-		f_digit = s1[l1] - '0';
+		fdigit = f[len1] - '0';
 		res = 0;
-		l2 = tmp;
-		for (l2--; l2 >= 0; l2--)
+		len2 = tmp;
+		for (len2--; len2 >= 0; len2--)
 		{
-			s_digit = s2[l2] - '0';
-			res += ptr[l2 + l1 + 1] + (f_digit * s_digit);
-			ptr[l1 + l2 + 1] = res % 10;
+			sdigit = s[len2] - '0';
+			res += ptr[len2 + len1 + 1] + (fdigit * sdigit);
+			ptr[len1 + len2 + 1] = res % 10;
 			res /= 10;
 		}
 		if (res)
-			ptr[l1 + l2 + 1] = res % 10;
+			ptr[len1 + len2 + 1] = res % 10;
 	}
-
 	while (*ptr == 0)
 	{
 		ptr++;
-		total_l--;
+		total--;
 	}
-
-	for (i = 0; i < total_l; i++)
+	for (i = 0; i < total; i++)
 		printf("%i", ptr[i]);
 	printf("\n");
-	free(temp);
+}
+/**
+ * onlyNumbers - determines if string has only numbers
+ * @c: input string
+ * Return: 0 if false, 1 if true
+ */
+int onlyNumbers(char *c)
+{
+	while (*c)
+	{
+		if (*c < '0' || *c > '9')
+			return (0);
+		c++;
+	}
+	return (1);
 }
 
+/**
+ * _memset - fills memory with a constant byte
+ * @s: memory area
+ * @b: constant byte
+ * @n: bytes of the memory area
+ * Return: pointer to the memory area s
+ */
+char *_memset(char *s, char b, unsigned int n)
+{
+	char *ptr = s;
+
+	while (n--)
+		*s++ = b;
+	return (ptr);
+}
 
 /**
- * main - Entry point
- *
- * Description: a program that multiplies
- *            two positive numbers
- *
- * @argc: number of arguments
- * @argv: arguments array
- *
- * Return: 0 on success 98 on faliure
-*/
+ * _calloc - allocates memory for an array, using malloc
+ * @nmemb: number of elements of pointer
+ * @size: size of each member
+ * Return: pointer of allocated memory
+ */
+void *_calloc(unsigned int nmemb, unsigned int size)
+{
+	void *ptr;
 
+	if (!nmemb || !size)
+		return (NULL);
+	ptr = malloc(size * nmemb);
+	if (!ptr)
+		return (NULL);
+	_memset(ptr, 0, size * nmemb);
+	return (ptr);
+}
+
+/**
+ * main - multiplies two positive numbers
+ * @argc: argument count
+ * @argv: argument vectors
+ * Return: 0
+ */
 int main(int argc, char *argv[])
 {
-	char *n1 = argv[1];
-	char *n2 = argv[2];
+	char *f = argv[1];
+	char *s = argv[2];
 
-	if (argc != 3 || check_number(n1) || check_number(n2))
-		error_exit();
-
-	if (*n1 == '0' || *n2 == '0')
+	if (argc != 3 || !onlyNumbers(f) || !onlyNumbers(s))
 	{
-		_putchar('0');
-		_putchar('\n');
+		printf("Error\n");
+		exit(98);
 	}
+	if (*f == 48 || *s == 48)
+		printf("0\n");
 	else
-		multiply(n1, n2);
+		multiply(s, f);
 	return (0);
 }
