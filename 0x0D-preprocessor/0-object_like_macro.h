@@ -1,6 +1,4 @@
-#ifndef 0 - OBJECT_LIKE_MACRO.H
-#define 0 - OBHECT_LIKE_MACRO.H
-
+#ifndef SIZE
 #define SIZE 1024
 
 #endif
