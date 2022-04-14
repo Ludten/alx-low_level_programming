@@ -3,7 +3,13 @@
 #include <stdarg.h>
 #include <stddef.h>
 
-
+/**
+ * print_strings - print strings
+ *
+ * @separator: character separating arguments
+ * @n: number of arguments
+ * @...: arguments
+ */
 void print_strings(const char *separator, const unsigned int n, ...)
 {
 	va_list ap;
