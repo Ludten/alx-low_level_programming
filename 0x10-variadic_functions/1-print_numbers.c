@@ -28,7 +28,7 @@ void print_numbers(const char *separator, const unsigned int n, ...)
 			if (separator == NULL)
 			;
 			else
-			printf("%c", *separator);
+			printf("%s", *separator);
 		}
 	}
 	printf("\n");
