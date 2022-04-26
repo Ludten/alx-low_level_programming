@@ -7,7 +7,7 @@
  * @head: head
  * @idx: index
  * @n: node data
- * Return: Addressof new node
+ * Return: Address of new node
  */
 listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 {
@@ -24,18 +24,16 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 
 	if (index == 0)
 	{
-		temp1->next = temp2;
+		temp1->next = *head;
 		*head = temp1;
 		return (temp1);
 	}
 
-	i = 0;
-	while (i < (idx - 1))
+	for (i = 0; i <= index - 1; i++)
 	{
 		temp2 = temp2->next;
 		if (temp2 == NULL)
 			return (NULL);
-		i++;
 	}
 	temp1->next = temp2->next;
 	temp2->next = temp1;
