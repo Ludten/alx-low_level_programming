@@ -5,7 +5,7 @@
  * nth node of the list
  *
  * @head: head
- * @idx: index
+ * @index: index
  * Return: 1 or -1
  */
 int delete_nodeint_at_index(listint_t **head, unsigned int index)
