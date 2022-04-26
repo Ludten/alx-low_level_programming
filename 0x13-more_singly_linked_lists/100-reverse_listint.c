@@ -23,5 +23,5 @@ listint_t *reverse_listint(listint_t **head)
 	first->next->next = first;
 	first->next = NULL;
 	*head = rest;
-	return (*head);
+	return (first);
 }
