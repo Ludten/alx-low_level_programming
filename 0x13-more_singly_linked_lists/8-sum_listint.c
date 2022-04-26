@@ -3,7 +3,7 @@
 /**
  * sum_listint - sum list
  *
- * @h: head
+ * @head: head
  * Return: sum
  */
 int sum_listint(listint_t *head)

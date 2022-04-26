@@ -1,10 +1,10 @@
 #include "lists.h"
 
 /**
- * get_nodeint_at_index - get the nth node of
- * the list
+ * insert_nodeint_at_index - add data to the
+ * nth node of the list
  *
- * @h: head
+ * @head: head
  * @idx: index
  * @n: node data
  * Return: Addressof new node

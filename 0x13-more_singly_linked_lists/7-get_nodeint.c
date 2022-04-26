@@ -4,7 +4,7 @@
  * get_nodeint_at_index - get the nth node of
  * the list
  *
- * @h: head
+ * @head: head
  * @index: index
  * Return: pointer to the node
  */
