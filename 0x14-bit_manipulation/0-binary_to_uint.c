@@ -14,26 +14,6 @@ int _isdigit(unsigned int c)
 }
 
 /**
- * _pow - solve exp
- *
- * @a: base
- * @b: exp
- * Return: value
- */
-unsigned int _pow(unsigned int a, unsigned int b)
-{
-	unsigned int i, c;
-
-	if (b == 0)
-		return (1);
-	c = 1;
-
-	for (i = 0; i < b; i++)
-		c *= a;
-	return (c);
-}
-
-/**
  * binary_to_uint - convert string binary to
  * decimal
  *
@@ -54,7 +34,7 @@ unsigned int binary_to_uint(const char *b)
 		a = (b[len - i - 1]) - 48;
 		if (_isdigit(a))
 			return (0);
-		dec += a * (_pow(2, i));
+		dec += a * (1 << i);
 	}
 	return (dec);
 }
