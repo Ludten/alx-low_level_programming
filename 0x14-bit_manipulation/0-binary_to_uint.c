@@ -19,7 +19,7 @@ unsigned int binary_to_uint(const char *b)
 	for (i = 0; i < len; i++)
 	{
 		a = (b[len - i - 1]) - 48;
-		if (a == 1 || a == 0)
+		if (a != 1 || a != 0)
 			return (0);
 		dec += a * (1 << i);
 	}
