@@ -13,8 +13,7 @@
  */
 int main(int ac, char **av)
 {
-	int fd[2];
-	int r, a, b;
+	int r, a, b, fd[2];
 	char buf[BUFSIZ];
 
 	if (ac != 3)
