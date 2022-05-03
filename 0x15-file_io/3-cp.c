@@ -84,7 +84,7 @@ void create_file(const char *filename, char *buff, size_t bt)
  */
 int main(int ac, char **av)
 {
-	if (ac != 4)
+	if (ac != 3)
 	{
 		dprintf(2, "Usage: cp file_from file_to\n");
 		exit(97);
