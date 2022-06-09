@@ -40,6 +40,4 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n);
 
 int delete_dnodeint_at_index(dlistint_t **head, unsigned int index);
 
-void deleteNode(dlistint_t **head, dlistint_t *del);
-
 #endif
