@@ -11,15 +11,14 @@
  */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	unsigned long int idx, table_size;
+	unsigned long int idx;
 	hash_node_t *elem, *curr_item;
 
-	if (key[0] == '\0' || key == NULL)
+	if (!ht || !strcmp(key, "") || !key)
 		return (0);
 
-	table_size = 1024;
 	elem = create_item(key, value);
-	idx = key_index((unsigned char *)key, table_size);
+	idx = key_index((unsigned char *)key, ht->size);
 
 	curr_item = ht->array[idx];
 	if (curr_item == NULL)
@@ -28,14 +27,15 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	}
 	else
 	{
-		if (strcmp(curr_item->key, key) == 0)
+		if (check_key(curr_item, key))
 		{
-			ht->array[idx]->value = strdup(value);
+			replace(curr_item, elem);
 			return (1);
 		}
 		else
 		{
-			handle_col(ht, elem, idx);
+			if (!handle_col(ht, elem, idx))
+				return (0);
 			return (1);
 		}
 	}
@@ -71,13 +71,17 @@ hash_node_t *create_item(const char *key, const char *value)
  * @table: hash table
  * @item: element to be added
  * @idx: index
+ * Return: 1 or 0
  */
-void handle_col(hash_table_t *table, hash_node_t *item, unsigned long int idx)
+int handle_col(hash_table_t *table, hash_node_t *item, unsigned long int idx)
 {
 	hash_node_t *head;
 
 	head = table->array[idx];
-	add_node_end(&head, item);
+	add_node(&head, item);
+	if (head == NULL)
+		return (0);
+	return (1);
 
 }
 
@@ -89,27 +93,19 @@ void handle_col(hash_table_t *table, hash_node_t *item, unsigned long int idx)
  * @item: item address
  * Return: Address
  */
-hash_node_t *add_node_end(hash_node_t **head, hash_node_t *item)
+hash_node_t *add_node(hash_node_t **head, hash_node_t *item)
 {
 	hash_node_t *temp = malloc(sizeof(hash_node_t));
-	hash_node_t *temp2 = *head;
 
 	if (temp == NULL)
 		return (NULL);
 
 	temp->key = strdup(item->key);
 	temp->value = strdup(item->value);
-	temp->next = NULL;
 
-	if (*head == NULL)
-	{
-		*head = temp;
-		return (*head);
-	}
-
-	while (temp2->next != NULL)
-		temp2 = temp2->next;
-	temp2->next = temp;
+	if (*head != NULL)
+		temp->next = *head;
+	*head = temp;
 
 	return (*head);
 }
