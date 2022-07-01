@@ -76,8 +76,8 @@ void handle_col(hash_table_t *table, hash_node_t *item, unsigned long int idx)
 {
 	hash_node_t *head;
 
-	head = item;
-	add_node(&head, table->array[idx]);
+	head = table->array[idx];
+	add_node_end(&head, item);
 
 }
 
@@ -89,19 +89,27 @@ void handle_col(hash_table_t *table, hash_node_t *item, unsigned long int idx)
  * @item: item address
  * Return: Address
  */
-hash_node_t *add_node(hash_node_t **head, hash_node_t *item)
+hash_node_t *add_node_end(hash_node_t **head, hash_node_t *item)
 {
 	hash_node_t *temp = malloc(sizeof(hash_node_t));
+	hash_node_t *temp2 = *head;
 
 	if (temp == NULL)
 		return (NULL);
 
 	temp->key = strdup(item->key);
 	temp->value = strdup(item->value);
+	temp->next = NULL;
 
-	if (*head != NULL)
-		temp->next = *head;
-	*head = temp;
+	if (*head == NULL)
+	{
+		*head = temp;
+		return (*head);
+	}
+
+	while (temp2->next != NULL)
+		temp2 = temp2->next;
+	temp2->next = temp;
 
 	return (*head);
 }
