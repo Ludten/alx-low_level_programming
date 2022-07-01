@@ -21,24 +21,13 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	idx = key_index((unsigned char *)key, ht->size);
 
 	curr_item = ht->array[idx];
-	if (curr_item == NULL)
+	if (check_key(curr_item, key))
 	{
-		ht->array[idx] = elem;
+		replace(curr_item, elem);
+		return (1);
 	}
-	else
-	{
-		if (check_key(curr_item, key))
-		{
-			replace(curr_item, elem);
-			return (1);
-		}
-		else
-		{
-			if (!handle_col(ht, elem, idx))
-				return (0);
-			return (1);
-		}
-	}
+	if (!handle_col(ht, elem, idx))
+		return (0);
 
 	return (1);
 
