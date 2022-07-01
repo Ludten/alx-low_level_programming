@@ -48,10 +48,6 @@ void hash_table_print(const hash_table_t *ht);
 
 void hash_table_delete(hash_table_t *ht);
 
-hash_node_t *create_item(const char *key, const char *value);
-
-hash_node_t *add_node(hash_node_t **head, hash_node_t *item);
-
 
 
 #endif

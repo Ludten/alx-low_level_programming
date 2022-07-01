@@ -17,9 +17,6 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	if (!ht || !strcmp(key, "") || !key)
 		return (0);
 
-	elem = create_item(key, value);
-	if (elem == NULL)
-		return (0);
 	idx = key_index((unsigned char *)key, ht->size);
 	curr_item = ht->array[idx];
 	while (curr_item != NULL)
@@ -27,74 +24,19 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		if (strcmp(curr_item->key, key) == 0)
 		{
 			free(curr_item->value);
-			curr_item->value = elem->value;
+			curr_item->value = strdup(value);
 			return (1);
 		}
 		curr_item = curr_item->next;
 	}
 	curr_item = ht->array[idx];
-	if (add_node(&curr_item, elem) == NULL)
+	elem = malloc(sizeof(hash_node_t));
+	if (elem == NULL)
 		return (0);
+	elem->key = strdup(key);
+	elem->value = strdup(value);
+	elem->next = curr_item;
+	ht->array[idx] = curr_item;
 
 	return (1);
-}
-
-/**
- * create_item - Create a item object
- *
- * @key: Key
- * @value: Value
- * Return: Address of item added
- */
-hash_node_t *create_item(const char *key, const char *value)
-{
-	hash_node_t *item;
-
-	item = malloc(sizeof(hash_node_t));
-	if (item == NULL)
-		return (NULL);
-
-	item->key = strdup(key);
-	if (item->key == NULL)
-		return (NULL);
-	item->value = strdup(value);
-	if (item->value == NULL)
-	{
-		free(item->key);
-		return (NULL);
-	}
-
-	return (item);
-}
-
-/**
- * add_node - add elements to the start of
- * the node
- *
- * @head: head
- * @item: item address
- * Return: Address
- */
-hash_node_t *add_node(hash_node_t **head, hash_node_t *item)
-{
-	hash_node_t *temp = malloc(sizeof(hash_node_t));
-
-	if (temp == NULL)
-		return (NULL);
-
-	temp->key = item->key;
-	temp->value = item->value;
-
-	if (*head == NULL)
-	{
-		*head = temp;
-		temp->next = NULL;
-	}
-	else
-	{
-		temp->next = *head;
-		*head = temp;
-	}
-
-	return (*head);
 }
