@@ -26,7 +26,8 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		replace(curr_item, elem);
 		return (1);
 	}
-	if (!handle_col(ht, elem, idx))
+	add_node(&curr_item, elem);
+	if (curr_item == NULL)
 		return (0);
 
 	return (1);
@@ -52,26 +53,6 @@ hash_node_t *create_item(const char *key, const char *value)
 	item->value = strdup(value);
 
 	return (item);
-}
-
-/**
- * handle_col - handle collisions
- *
- * @table: hash table
- * @item: element to be added
- * @idx: index
- * Return: 1 or 0
- */
-int handle_col(hash_table_t *table, hash_node_t *item, unsigned long int idx)
-{
-	hash_node_t *head;
-
-	head = table->array[idx];
-	add_node(&head, item);
-	if (head == NULL)
-		return (0);
-	return (1);
-
 }
 
 /**
