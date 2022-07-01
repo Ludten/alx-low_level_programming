@@ -14,7 +14,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	unsigned long int idx, table_size;
 	hash_node_t *elem, *curr_item;
 
-	if (key == NULL)
+	if (key[0] == '\0' || key == NULL)
 		return (0);
 
 	table_size = 1024;
@@ -23,7 +23,9 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 
 	curr_item = ht->array[idx];
 	if (curr_item == NULL)
+	{
 		ht->array[idx] = elem;
+	}
 	else
 	{
 		if (strcmp(curr_item->key, key) == 0)
@@ -74,7 +76,7 @@ void handle_col(hash_table_t *table, hash_node_t *item, unsigned long int idx)
 {
 	hash_node_t *head;
 
-	head = item->next;
+	head = item;
 	add_node(&head, table->array[idx]);
 
 }
