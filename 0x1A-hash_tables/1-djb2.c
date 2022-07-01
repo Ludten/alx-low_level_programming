@@ -53,5 +53,5 @@ void replace(hash_node_t *table, hash_node_t *item)
 		temp = temp->next;
 
 	free(temp->value);
-	temp->value = strdup(item->value);
+	temp->value = item->value;
 }

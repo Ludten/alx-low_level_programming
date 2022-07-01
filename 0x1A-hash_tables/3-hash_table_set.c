@@ -18,6 +18,8 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		return (0);
 
 	elem = create_item(key, value);
+	if (elem == NULL)
+		return (0);
 	idx = key_index((unsigned char *)key, ht->size);
 
 	curr_item = ht->array[idx];
@@ -50,7 +52,14 @@ hash_node_t *create_item(const char *key, const char *value)
 		return (NULL);
 
 	item->key = strdup(key);
+	if (item->key == NULL)
+		return (NULL);
 	item->value = strdup(value);
+	if (item->value == NULL)
+	{
+		free(item->key);
+		return (NULL);
+	}
 
 	return (item);
 }
@@ -70,8 +79,8 @@ hash_node_t *add_node(hash_node_t **head, hash_node_t *item)
 	if (temp == NULL)
 		return (NULL);
 
-	temp->key = strdup(item->key);
-	temp->value = strdup(item->value);
+	temp->key = item->key;
+	temp->value = item->value;
 
 	if (*head == NULL)
 	{
