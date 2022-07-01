@@ -74,7 +74,7 @@ void handle_col(hash_table_t *table, hash_node_t *item, unsigned long int idx)
 {
 	hash_node_t *head;
 
-	head = item;
+	head = item->next;
 	add_node(&head, table->array[idx]);
 
 }
