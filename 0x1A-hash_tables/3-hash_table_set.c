@@ -73,9 +73,16 @@ hash_node_t *add_node(hash_node_t **head, hash_node_t *item)
 	temp->key = strdup(item->key);
 	temp->value = strdup(item->value);
 
-	if (*head != NULL)
+	if (*head == NULL)
+	{
+		*head = temp;
+		temp->next = NULL;
+	}
+	else
+	{
 		temp->next = *head;
-	*head = temp;
+		*head = temp;
+	}
 
 	return (*head);
 }

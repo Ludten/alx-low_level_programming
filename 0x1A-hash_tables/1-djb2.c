@@ -31,7 +31,7 @@ int check_key(hash_node_t *table, const char *key)
 {
 	while (table)
 	{
-		if (!strcmp(table->key, key))
+		if (strcmp(table->key, key) == 0)
 			return (1);
 		table = table->next;
 	}
@@ -49,7 +49,7 @@ void replace(hash_node_t *table, hash_node_t *item)
 {
 	hash_node_t *temp = table;
 
-	while (temp && strcmp(temp->key, item->key))
+	while (temp && (strcmp(temp->key, item->key) != 0))
 		temp = temp->next;
 
 	free(temp->value);
