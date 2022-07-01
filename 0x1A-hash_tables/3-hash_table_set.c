@@ -21,19 +21,22 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	if (elem == NULL)
 		return (0);
 	idx = key_index((unsigned char *)key, ht->size);
-
 	curr_item = ht->array[idx];
-	if (check_key(curr_item, key))
+	while (curr_item != NULL)
 	{
-		replace(curr_item, elem);
-		return (1);
+		if (strcmp(curr_item->key, key) == 0)
+		{
+			free(curr_item->value);
+			curr_item->value = elem->value;
+			return (1);
+		}
+		curr_item = curr_item->next;
 	}
-	add_node(&curr_item, elem);
-	if (curr_item == NULL)
+	curr_item = ht->array[idx];
+	if (add_node(&curr_item, elem) == NULL)
 		return (0);
 
 	return (1);
-
 }
 
 /**

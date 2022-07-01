@@ -50,10 +50,6 @@ void hash_table_delete(hash_table_t *ht);
 
 hash_node_t *create_item(const char *key, const char *value);
 
-int check_key(hash_node_t *table, const char *key);
-
-void replace(hash_node_t *table, hash_node_t *item);
-
 hash_node_t *add_node(hash_node_t **head, hash_node_t *item);
 
 
