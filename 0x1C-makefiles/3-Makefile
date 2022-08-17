@@ -20,5 +20,5 @@ fclean:
 	$(RM) -f ~* $(NAME) $(OBJ)
 
 re:
-	make fclean -f 3-Makefile
+	$(RM) -f ~* $(NAME) $(OBJ)
 	make -f 3-Makefile
