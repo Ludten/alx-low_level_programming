@@ -20,5 +20,5 @@ fclean:
 	rm -f ~* $(NAME) $(OBJ)
 
 re:
-	make clean -f 3-Makefile
+	make oclean -f 3-Makefile
 	make -f 3-Makefile
