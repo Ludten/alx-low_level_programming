@@ -2,7 +2,7 @@ CC = gcc
 SRC = main.c school.c
 OBJ = $(SRC:.c=.o)
 NAME = school
-RM = ~* $(NAME)
+RM = rm
 
 .c.o:
 	$(CC) -c $<
@@ -11,13 +11,13 @@ all: $(OBJ)
 	$(CC) $(OBJ) -o $(NAME)
 
 clean:
-	rm -f $(RM)
+	$(RM) -f ~* $(NAME)
 
 oclean:
-	rm -f $(OBJ)
+	$(RM) -f $(OBJ)
 
 fclean:
-	rm -f $(RM) $(OBJ)
+	$(RM) -f ~* $(NAME) $(OBJ)
 
 re:
 	make fclean -f 3-Makefile
