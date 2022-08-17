@@ -5,8 +5,7 @@ A module on island perimeter algorithm
 
 
 def island_perimeter(grid):
-    """
-    returns the perimeter of the island described
+    """returns the perimeter of the island described
     """
     m = len(grid)
     n = len(grid[0])
