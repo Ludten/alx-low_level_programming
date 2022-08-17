@@ -5,7 +5,7 @@ NAME = school
 RM = rm
 
 .c.o:
-	$(CC) -c $<
+	$(CC) -c $< -o $@
 
 all: $(OBJ)
 	$(CC) $(OBJ) -o $(NAME)
