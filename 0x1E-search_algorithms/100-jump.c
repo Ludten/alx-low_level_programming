@@ -1,5 +1,4 @@
 #include "search_algos.h"
-#include <math.h>
 
 /**
  * jump_search - Searches for a value in a sorted array of integers using the
@@ -30,14 +29,11 @@ int jump_search(int *array, size_t size, int value)
 	if (step > size)
 		step = size - 1;
 
-	while (array[prev] <= value && prev <= step)
+	for ( ; array[prev] <= value && prev <= step; prev++)
 	{
 		printf("Value checked array[%lu] = [%d]\n", prev, array[prev]);
 		if (array[prev] == value)
-		{
 			return (prev);
-		}
-		prev++;
 	}
 
 	return (-1);
